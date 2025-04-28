@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mlcEngine } from '$lib/stores/mlcEngine'; // Import the updated store object
+	import { mlcEngine } from '$lib/utils/mlcEngine'; // Import the updated store object
 	import { createEventDispatcher } from 'svelte';
 
 	// Get the specific store we need

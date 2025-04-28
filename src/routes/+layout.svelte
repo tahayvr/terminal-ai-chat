@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { mlcEngine } from '$lib/stores/mlcEngine';
+	import { mlcEngine } from '$lib/utils/mlcEngine';
 	let { children } = $props();
 
 	// Initialize the engine when the layout mounts

@@ -4,7 +4,7 @@
 	import TermSign from './TermSign.svelte';
 	import AiResponse from './AiResponse.svelte';
 	import { tick } from 'svelte';
-	import { mlcEngine } from '$lib/stores/mlcEngine';
+	import { mlcEngine } from '$lib/utils/mlcEngine';
 	import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
 	import { chatInputValue } from '$lib/states/chatState';
 
@@ -14,8 +14,8 @@
 	let isModelLoaded = $state(false);
 	let showInput = $state(false);
 
+	// Scroll to bottom of the terminal
 	let element = $state<HTMLElement | any>(null);
-
 	const scrollToBottom = async (node: HTMLElement) => {
 		node.scroll({ top: node.scrollHeight, behavior: 'smooth' });
 	};

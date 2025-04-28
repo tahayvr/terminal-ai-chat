@@ -8,12 +8,12 @@
 </div>
 
 <SvelteSeo
-	title="Terminal Chat | by noiseRandom"
+	title="Chat Terminal | by noiseRandom"
 	description="A terminal-inspired AI chat interface that runs on your browser."
 	canonical="https://chat.taha.gg"
 	keywords="AI, chat, terminal, web, browser, noiseRandom, taha.gg"
 	openGraph={{
-		title: 'Terminal Chat | by noiseRandom',
+		title: 'Chat Terminal | by noiseRandom',
 		description: 'A terminal-inspired AI chat interface that runs on your browser.',
 		url: 'https://chat.taha.gg',
 		type: 'website',
@@ -28,7 +28,7 @@
 	}}
 	twitter={{
 		card: 'summary_large_image',
-		title: 'Terminal Chat | by noiseRandom',
+		title: 'Chat Terminal | by noiseRandom',
 		description: 'A terminal-inspired AI chat interface that runs on your browser.',
 		site: '@tahayvr',
 		image: 'https://chat.taha.gg/images/teminal-chat-thumb.webp'

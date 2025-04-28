@@ -14,15 +14,6 @@
 		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 
-	// Get all keys from the usage object for display
-	function getUsageKeys(usage: any): string[] {
-		if (!usage) return [];
-		// Filter out the standard keys we're already displaying separately
-		return Object.keys(usage).filter(
-			(key) => !['prompt_tokens', 'completion_tokens', 'total_tokens'].includes(key)
-		);
-	}
-
 	// Parse markdown to HTML
 	$effect(() => {
 		if (content) {

@@ -1,27 +1,22 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from 'svelte';
-	import { chatInputValue } from '$lib/states/chatState';
 	import TermSign from './TermSign.svelte';
+
 	// Create event dispatcher
 	const dispatch = createEventDispatcher();
 
 	// Using native textarea instead of component for simpler focus management
 	let textareaElement: HTMLTextAreaElement;
-	let localInputValue = $state('');
-
-	// Sync local value with store
-	$effect(() => {
-		$chatInputValue = localInputValue;
-	});
+	let inputValue = $state('');
 
 	// Handle key press events - this function is attached via attribute (not Svelte event)
 	function handleKeyDown(event: any) {
-		if (event.key === 'Enter' && !event.shiftKey && localInputValue.trim()) {
+		if (event.key === 'Enter' && !event.shiftKey && inputValue.trim()) {
 			event.preventDefault(); // Prevent default newline
 			// Dispatch event to notify parent component
-			dispatch('submit', localInputValue);
-			// Clear the local input value
-			localInputValue = '';
+			dispatch('submit', inputValue);
+			// Clear the input value
+			inputValue = '';
 			// Keep focus on textarea
 			textareaElement.focus();
 		}
@@ -37,8 +32,13 @@
 
 	$effect(() => {
 		// Adjust height when content changes
-		if (localInputValue) adjustHeight();
+		if (inputValue) adjustHeight();
 	});
+
+	// Expose method to clear input from parent
+	export function clearInput() {
+		inputValue = '';
+	}
 
 	onMount(() => {
 		// Focus textarea when component is mounted
@@ -55,7 +55,7 @@
 		<textarea
 			class="max-h-[300px] min-h-[24px] w-full resize-none overflow-hidden border-none bg-transparent p-0 font-mono text-sm outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
 			bind:this={textareaElement}
-			bind:value={localInputValue}
+			bind:value={inputValue}
 			onkeydown={handleKeyDown}
 			oninput={adjustHeight}
 			rows="1"

@@ -6,13 +6,13 @@
 	import { tick } from 'svelte';
 	import { mlcEngine } from '$lib/utils/mlcEngine';
 	import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
-	import { chatInputValue } from '$lib/states/chatState';
 
 	// Get store handles
 	const { engine, ready, progress } = mlcEngine;
 
 	let isModelLoaded = $state(false);
 	let showInput = $state(false);
+	let chatInputComponent = $state<InstanceType<typeof ChatInput> | null>(null);
 
 	// Scroll to bottom of the terminal
 	let element = $state<HTMLElement | any>(null);
@@ -53,7 +53,9 @@
 		currentInputId++;
 
 		// Clear the input value for the next input
-		chatInputValue.set('');
+		if (chatInputComponent) {
+			chatInputComponent.clearInput();
+		}
 
 		try {
 			// Build message history for the API
@@ -156,7 +158,7 @@
 
 		<!-- Only show input when not generating -->
 		{#if !isGenerating}
-			<ChatInput on:submit={handleChatSubmit} />
+			<ChatInput bind:this={chatInputComponent} on:submit={handleChatSubmit} />
 		{/if}
 	{/if}
 </div>

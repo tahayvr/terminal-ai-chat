@@ -6,7 +6,7 @@
 	import { tick } from 'svelte';
 	import { mlcEngine } from '$lib/utils/mlcEngine';
 	import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
-
+	import InfoMessage from './InfoMessage.svelte';
 	// Get store handles
 	const { engine, ready, progress } = mlcEngine;
 
@@ -125,6 +125,7 @@
 </script>
 
 <div class="flex h-[60dvh] flex-col space-y-4 overflow-y-auto" bind:this={element}>
+	<InfoMessage />
 	<!-- Model status -->
 	<div class="flex flex-row items-center gap-2">
 		<TermSign />

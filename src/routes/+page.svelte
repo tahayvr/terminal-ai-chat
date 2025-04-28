@@ -15,14 +15,22 @@
 	openGraph={{
 		title: 'Terminal Chat | by noiseRandom',
 		description: 'A terminal-inspired AI chat interface that runs on your browser.',
-
 		url: 'https://chat.taha.gg',
-		type: 'website'
+		type: 'website',
+		images: [
+			{
+				url: 'https://chat.taha.gg/images/teminal-chat-thumb.webp',
+				width: 1200,
+				height: 630,
+				alt: 'Terminal Chat interface screenshot'
+			}
+		]
 	}}
 	twitter={{
 		card: 'summary_large_image',
 		title: 'Terminal Chat | by noiseRandom',
 		description: 'A terminal-inspired AI chat interface that runs on your browser.',
-		site: '@tahayvr'
+		site: '@tahayvr',
+		image: 'https://chat.taha.gg/images/teminal-chat-thumb.webp'
 	}}
 />

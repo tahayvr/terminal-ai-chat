@@ -92,7 +92,6 @@
 					aiResponse += content;
 
 					if (chunk.usage) {
-						console.log('Usage stats:', chunk.usage);
 						finalUsage = chunk.usage as UsageStats;
 					}
 
@@ -114,7 +113,6 @@
 				);
 			}
 		} catch (error: any) {
-			console.error('Chat error:', error);
 			// Show error in the UI
 			messages = [
 				...messages,

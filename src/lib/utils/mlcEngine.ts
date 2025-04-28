@@ -17,28 +17,28 @@ engineInstanceStore.subscribe((value) => {
 async function initializeEngine() {
 	// Use .set() to update store values
 	if (currentEngineInstance || (await import('svelte/store').then((m) => m.get(isLoadingStore)))) {
-		console.log('Engine already initializing or initialized.');
+		// console.log('Engine already initializing or initialized.');
 		return;
 	}
 
-	console.log('Initializing MLC Engine...');
+	// console.log('Initializing MLC Engine...');
 	isLoadingStore.set(true);
 	progressTextStore.set('Creating engine instance...');
 
 	try {
 		const initProgressCallback = (report: InitProgressReport) => {
 			progressTextStore.set(report.text);
-			console.log('Model loading progress:', report);
+			// console.log('Model loading progress:', report);
 		};
 
 		const engine = new MLCEngine({ initProgressCallback });
 		engineInstanceStore.set(engine); // Update store
 
-		console.log('Reloading engine model...');
+		// console.log('Reloading engine model...');
 		progressTextStore.set('Loading model...');
 		await engine.reload('Llama-3.2-1B-Instruct-q0f16-MLC');
 
-		console.log('Engine initialization complete.');
+		// console.log('Engine initialization complete.');
 		progressTextStore.set('Model loaded successfully!');
 		isReadyStore.set(true);
 	} catch (error) {

@@ -3,7 +3,7 @@
 	import ModelInit from './ModelInit.svelte';
 	import TermSign from './TermSign.svelte';
 	import AiResponse from './AiResponse.svelte';
-	import { onMount } from 'svelte';
+	import { tick } from 'svelte';
 	import { mlcEngine } from '$lib/stores/mlcEngine';
 	import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
 	import { chatInputValue } from '$lib/states/chatState';
@@ -13,6 +13,12 @@
 
 	let isModelLoaded = $state(false);
 	let showInput = $state(false);
+
+	let element = $state<HTMLElement | any>(null);
+
+	const scrollToBottom = async (node: HTMLElement) => {
+		node.scroll({ top: node.scrollHeight, behavior: 'smooth' });
+	};
 
 	// Type for usage statistics
 	type UsageStats = {
@@ -94,6 +100,10 @@
 							? { ...msg, content: aiResponse + '█', usage: finalUsage }
 							: msg
 					);
+
+					// Scroll while generating text
+					await tick();
+					scrollToBottom(element);
 				}
 
 				// Finalize the assistant's response (remove cursor)
@@ -114,7 +124,7 @@
 	}
 </script>
 
-<div class="flex flex-col space-y-4">
+<div class="flex h-[60dvh] flex-col space-y-4 overflow-y-auto" bind:this={element}>
 	<!-- Model status -->
 	<div class="flex flex-row items-center gap-2">
 		<TermSign />

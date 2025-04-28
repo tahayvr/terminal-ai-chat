@@ -35,7 +35,7 @@
 	});
 </script>
 
-<div class="flex flex-row items-center justify-center gap-2">
+<div class="flex flex-row items-center justify-center gap-2 text-green-400">
 	<TermSign />
 	<input
 		type="text"

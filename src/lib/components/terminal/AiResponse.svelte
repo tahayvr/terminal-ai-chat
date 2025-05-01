@@ -38,7 +38,7 @@
 <div class="flex flex-row items-start justify-center gap-2">
 	<div class="flex-1">
 		<div
-			class="prose prose-sm prose-zinc max-w-none font-mono text-foreground prose-h1:text-2xl prose-h2:text-xl prose-strong:text-white prose-ul:pl-6"
+			class="prose prose-sm prose-zinc max-w-none font-mono text-foreground dark:prose-invert prose-h1:text-2xl prose-h2:text-xl prose-ul:pl-6 dark:prose-pre:bg-muted"
 		>
 			{#if parsedContent}
 				{@html parsedContent}

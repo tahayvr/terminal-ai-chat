@@ -17,7 +17,7 @@
 </script>
 
 {#if $progressStore}
-	<p class="text-left font-mono text-sm lowercase">{$progressStore}</p>
+	<p class="text-left font-mono text-sm lowercase text-muted-foreground">{$progressStore}</p>
 {:else}
-	<p class="text-left font-mono text-sm">Initializing...</p>
+	<p class="text-left font-mono text-sm text-muted-foreground">Initializing...</p>
 {/if}

@@ -1,6 +1,8 @@
 import type { PageServerLoad } from './$types';
+import { getSystemPrompt } from '$lib/server/systemPrompt';
 
-export const load = (async () => {
-	// You can load server-side data here if needed
-	return {};
-}) satisfies PageServerLoad;
+export const load: PageServerLoad = async () => {
+	return {
+		systemPrompt: getSystemPrompt()
+	};
+};

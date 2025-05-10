@@ -7,6 +7,13 @@
 	import { mlcEngine } from '$lib/utils/mlcEngine';
 	import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
 	import InfoMessage from './InfoMessage.svelte';
+
+	// Define props
+	const { systemPrompt = 'You are a helpful AI assistant that provides concise answers.' } =
+		$props<{
+			systemPrompt?: string;
+		}>();
+
 	// Get store handles
 	const { engine, ready, progress } = mlcEngine;
 
@@ -62,8 +69,7 @@
 			const apiMessages: ChatCompletionMessageParam[] = [
 				{
 					role: 'system',
-					content:
-						'You are a helpful AI assistant that provides concise answers. your name is Taha.'
+					content: systemPrompt
 				},
 				...messages.map((msg) => ({
 					role: msg.role as 'user' | 'assistant',

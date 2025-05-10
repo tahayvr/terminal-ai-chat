@@ -36,7 +36,7 @@ async function initializeEngine() {
 
 		// console.log('Reloading engine model...');
 		progressTextStore.set('Loading model...');
-		await engine.reload('Llama-3.2-1B-Instruct-q0f16-MLC');
+		await engine.reload('Llama-3.2-1B-Instruct-q4f16_1-MLC');
 
 		// console.log('Engine initialization complete.');
 		progressTextStore.set('Model loaded successfully!');

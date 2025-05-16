@@ -11,13 +11,14 @@
 </div>
 
 <SvelteSeo
-	title="Terminal Chat | by noiseRandom"
-	description="A terminal-inspired AI chat interface that runs on your browser."
+	title="Terminal Chat LLM | by noiseRandom"
+	description="A web-based AI chat application with a terminal-inspired UI, built with Sveltekit and MLC Web LLM"
 	canonical="https://chat.taha.gg"
 	keywords="AI, chat, terminal, web, browser, noiseRandom, taha.gg"
 	openGraph={{
-		title: 'Terminal Chat | by noiseRandom',
-		description: 'A terminal-inspired AI chat interface that runs on your browser.',
+		title: 'Terminal Chat LLM | by noiseRandom',
+		description:
+			'A web-based AI chat application with a terminal-inspired UI, built with Sveltekit and MLC Web LLM',
 		url: 'https://chat.taha.gg',
 		type: 'website',
 		images: [
@@ -31,8 +32,9 @@
 	}}
 	twitter={{
 		card: 'summary_large_image',
-		title: 'Terminal Chat | by noiseRandom',
-		description: 'A terminal-inspired AI chat interface that runs on your browser.',
+		title: 'Terminal Chat LLM | by noiseRandom',
+		description:
+			'A web-based AI chat application with a terminal-inspired UI, built with Sveltekit and MLC Web LLM',
 		site: '@tahayvr',
 		image: 'https://chat.taha.gg/images/teminal-chat-thumb.webp'
 	}}

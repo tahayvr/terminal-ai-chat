@@ -1,6 +1,10 @@
-# Terminal Chat
+# Terminal Chat LLM
 
-AI chat interface with a terminal-inspired UI, built with Sveltekit and [MLC Web LLM](https://webllm.mlc.ai/).
+Web-based AI chat application with a terminal-inspired UI, built with Sveltekit and [MLC Web LLM](https://webllm.mlc.ai/).
+
+<p align="center">
+<img src="static/images/teminal-chat-thumb.webp" alt="Terminal Chat LLM" width="600"/>
+</p>
 
 ## Features
 
@@ -18,4 +22,4 @@ AI chat interface with a terminal-inspired UI, built with Sveltekit and [MLC Web
 
 ## License
 
-MIT
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

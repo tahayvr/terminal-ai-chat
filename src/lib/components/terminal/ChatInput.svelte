@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from 'svelte';
 	import TermSign from './TermSign.svelte';
+	import { processCommand } from '$lib/utils/commandHandler';
 
 	// Create event dispatcher
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		submit: string;
+		command: ReturnType<typeof processCommand>;
+	}>();
 
 	// Using native textarea instead of component for simpler focus management
 	let textareaElement: HTMLTextAreaElement;
@@ -13,8 +17,18 @@
 	function handleKeyDown(event: any) {
 		if (event.key === 'Enter' && !event.shiftKey && inputValue.trim()) {
 			event.preventDefault(); // Prevent default newline
-			// Dispatch event to notify parent component
-			dispatch('submit', inputValue);
+
+			// Process input as a possible command
+			const result = processCommand(inputValue.trim());
+
+			// If it's a command, dispatch command event
+			if (result.isCommand) {
+				dispatch('command', result);
+			} else {
+				// Otherwise dispatch as normal message
+				dispatch('submit', inputValue);
+			}
+
 			// Clear the input value
 			inputValue = '';
 			// Keep focus on textarea

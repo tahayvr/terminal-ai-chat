@@ -7,6 +7,7 @@
 	import { mlcEngine } from '$lib/utils/mlcEngine';
 	import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
 	import InfoMessage from './InfoMessage.svelte';
+	import type { CommandResult } from '$lib/utils/commandHandler';
 
 	// Define props
 	const { systemPrompt = 'You are a helpful AI assistant that provides concise answers.' } =
@@ -46,6 +47,65 @@
 		setTimeout(() => {
 			showInput = true;
 		}, 100);
+	}
+
+	// Handle command from ChatInput
+	function handleCommand(event: { detail: CommandResult }) {
+		const command = event.detail;
+
+		// Add the command to chat history if it should be shown
+		if (command.showInChat) {
+			// Use 'assistant' role to leverage markdown rendering for command responses
+			messages = [
+				...messages,
+				{
+					role: 'assistant',
+					content: command.response || '',
+					usage: null
+				}
+			];
+		}
+
+		// Execute command actions
+		if (command.action === 'clear') {
+			messages = [];
+		} else if (command.action === 'export') {
+			exportChat();
+		}
+
+		// Scroll to bottom after command execution
+		setTimeout(() => {
+			scrollToBottom(element);
+		}, 100);
+	}
+
+	// Export chat history as markdown
+	function exportChat() {
+		if (messages.length === 0) return;
+
+		// Format messages as markdown
+		const markdown = messages
+			.map((msg) => {
+				if (msg.role === 'user') {
+					return `## User:\n${msg.content}\n`;
+				} else if (msg.role === 'assistant') {
+					return `## Assistant:\n${msg.content}\n`;
+				} else {
+					return `## System:\n${msg.content}\n`;
+				}
+			})
+			.join('\n');
+
+		// Create a blob and download link
+		const blob = new Blob([markdown], { type: 'text/markdown' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = `terminal-chat-export-${new Date().toISOString().slice(0, 10)}.md`;
+		a.click();
+
+		// Clean up
+		URL.revokeObjectURL(url);
 	}
 
 	async function handleChatSubmit(event: { detail: string }) {
@@ -118,12 +178,10 @@
 					i === messages.length - 1 ? { ...msg, content: aiResponse, usage: finalUsage } : msg
 				);
 			}
-		} catch (error: any) {
+		} catch (error) {
 			// Show error in the UI
-			messages = [
-				...messages,
-				{ role: 'system', content: `Error: ${error.message || 'Unknown error'}`, usage: null }
-			];
+			const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+			messages = [...messages, { role: 'system', content: `Error: ${errorMessage}`, usage: null }];
 		} finally {
 			isGenerating = false;
 		}
@@ -148,12 +206,16 @@
 				<div class="flex-1">
 					{#if message.role === 'user'}
 						<div class="font-mono text-sm text-green-400">
-							{message.content}
+							{#if message.content.startsWith('/')}
+								<span class="text-yellow-500">{message.content}</span>
+							{:else}
+								{message.content}
+							{/if}
 						</div>
 					{:else if message.role === 'assistant'}
 						<AiResponse content={message.content} usage={message.usage} />
 					{:else}
-						<div class="font-mono text-sm text-red-400">
+						<div>
 							{message.content}
 						</div>
 					{/if}
@@ -163,7 +225,11 @@
 
 		<!-- Only show input when not generating -->
 		{#if !isGenerating}
-			<ChatInput bind:this={chatInputComponent} on:submit={handleChatSubmit} />
+			<ChatInput
+				bind:this={chatInputComponent}
+				on:submit={handleChatSubmit}
+				on:command={handleCommand}
+			/>
 		{/if}
 	{/if}
 </div>

@@ -23,7 +23,7 @@
 		type: 'website',
 		images: [
 			{
-				url: 'https://chat.taha.gg/images/teminal-chat-thumb.webp',
+				url: 'https://chat.taha.gg/images/terminal-chat-llm-banner.webp',
 				width: 1200,
 				height: 630,
 				alt: 'Terminal Chat interface screenshot'
@@ -36,6 +36,6 @@
 		description:
 			'A web-based AI chat application with a terminal-inspired UI, built with Sveltekit and MLC Web LLM',
 		site: '@tahayvr',
-		image: 'https://chat.taha.gg/images/teminal-chat-thumb.webp'
+		image: 'https://chat.taha.gg/images/terminal-chat-llm-banner.webp'
 	}}
 />

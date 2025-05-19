@@ -6,7 +6,7 @@
 	export let data: PageData;
 </script>
 
-<div class="flex flex-col items-start justify-center gap-2 px-4 py-8 md:p-24">
+<div class="flex flex-col items-start justify-center gap-2 bg-background px-4 py-8 md:p-24">
 	<Terminal systemPrompt={data.systemPrompt} />
 </div>
 

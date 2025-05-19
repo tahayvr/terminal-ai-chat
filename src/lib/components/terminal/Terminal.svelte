@@ -188,7 +188,7 @@
 	}
 </script>
 
-<div class="flex h-[60dvh] flex-col space-y-4 overflow-y-auto" bind:this={element}>
+<div class="flex h-[60dvh] flex-col space-y-4 overflow-y-auto bg-background" bind:this={element}>
 	<InfoMessage />
 	<!-- Model status -->
 	<div class="flex flex-row items-center gap-2">
